@@ -19,7 +19,7 @@ class UnalignedDataset(BaseDataset):
 
     def load_image(self, dom, idx):
         path = self.paths[dom][idx]
-        img = Image.open(path).convert('RGB')
+        img = Image.open(path)  # .convert('RGB')
         img = self.transform(img)
         return img, path
 

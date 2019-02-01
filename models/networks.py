@@ -282,8 +282,10 @@ class NLayerDiscriminator(nn.Module):
         return SequentialOutput(*sequences)
 
     def forward(self, input):
-        blurred = torch.nn.functional.conv2d(input, self.blur_filter, groups=3, padding=2)
-        gray = (.299*input[:,0,:,:] + .587*input[:,1,:,:] + .114*input[:,2,:,:]).unsqueeze_(1)
+        # blurred = torch.nn.functional.conv2d(input, self.blur_filter, groups=3, padding=2)
+        # gray = (.299*input[:,0,:,:] + .587*input[:,1,:,:] + .114*input[:,2,:,:]).unsqueeze_(1)
+        blurred = torch.nn.functional.conv2d(input, self.blur_filter, groups=1, padding=2)
+        gray = (.299*input[:,0,:,:] + .587*input[:,0,:,:] + .114*input[:,0,:,:]).unsqueeze_(1)
 
         gray_dsamp = nn.functional.conv2d(gray, self.dsamp_filter, stride=2)
         dx = nn.functional.conv2d(gray_dsamp, self.grad_filter)

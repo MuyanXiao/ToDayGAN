@@ -22,7 +22,8 @@ def gkern_2d(size=5, sigma=3):
     dirac[size//2, size//2] = 1
     mask = gaussian_filter(dirac, sigma)
     # Adjust dimensions for torch conv2d
-    return np.stack([np.expand_dims(mask, axis=0)] * 3)
+    # return np.stack([np.expand_dims(mask, axis=0)] * 3)
+    return np.stack([np.expand_dims(mask, axis=0)] * 1)
 
 
 def diagnose_network(net, name='network'):
