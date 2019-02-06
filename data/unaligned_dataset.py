@@ -20,6 +20,7 @@ class UnalignedDataset(BaseDataset):
     def load_image(self, dom, idx):
         path = self.paths[dom][idx]
         img = Image.open(path)  # .convert('RGB')
+        img = transforms.functional.crop(img, 0, 50, 400, 900)
         img = self.transform(img)
         return img, path
 
